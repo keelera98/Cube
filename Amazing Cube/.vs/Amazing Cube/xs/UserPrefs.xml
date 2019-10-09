@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{1525E26F-7A77-9551-B1A1-BC08C327920D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SpawnFloor.cs">
+    <Files>
+      <File FileName="Assets/Scripts/SpawnFloor.cs" Line="20" Column="69" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
