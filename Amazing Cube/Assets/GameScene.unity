@@ -235,6 +235,8 @@ MonoBehaviour:
   floorTile: {fileID: 5873212711401757208, guid: 0280d790dc5d74530bd05b33b3fc67a3,
     type: 3}
   floorSize: 10
+  minPathSize: 7
+  pathSize: 0
 --- !u!4 &836151212
 Transform:
   m_ObjectHideFlags: 0
