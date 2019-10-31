@@ -19,6 +19,10 @@ public class SpawnFloor : MonoBehaviour
     int startX = 0;
     int startZ = 0;
 
+    //holds end tiles
+    int endX = 0;
+    int endZ = 0;
+
     //Holds the currently generated tiles x and z position
     int currentX, currentZ;
 
@@ -40,6 +44,7 @@ public class SpawnFloor : MonoBehaviour
         //Checks if numbers are valid for tile selection
         while (!validTile)
         {
+            Random.InitState((int)System.DateTime.Now.Ticks);
             int randX = Random.Range(0, floorSize);
             int randZ = Random.Range(0, floorSize);
 
@@ -67,14 +72,45 @@ public class SpawnFloor : MonoBehaviour
             }
         }
 
+        //Checks if numbers are valid for tile selection
+        while (!validTile)
+        {
+            int randX = Random.Range(0, floorSize);
+            int randZ = Random.Range(0, floorSize);
+
+            //Picks a ending tile along the edge of floor plane
+            for (int x = 0; x < floorSize; x++)
+            {
+                for (int z = 0; z < floorSize; z++)
+                {
+                    //Sets random edge tile to true
+                    if ((randX == 0 || randX == floorSize) && (randX != startX))
+                    {
+                        Floor[randX, randZ].SetActive(true);
+                        endX = randX;
+                        endZ = randZ;
+                        validTile = true;
+                    }
+                    else if ((randZ == 0 || randZ == floorSize) && (randZ != startZ))
+                    {
+                        Floor[randX, randZ].SetActive(true);
+                        endX = randX;
+                        endZ = randZ;
+                        validTile = true;
+                    }
+                }
+            }
+        }
+
         //To Do: Create path to generated endpoint tile, by checking if they are
         //connected and contineing until we reach the endpoint
         currentX = startX;
         currentZ = startZ;
     }
 
-    void createPath(int currentX, int currentZ, int startX, int startZ)
+    void createPath(int currentX, int currentZ, int startX, int startZ, int endX, int endZ)
     {
+        Random.InitState((int)System.DateTime.Now.Ticks);
         //Decides to add/subtract from x/z
         int nextTilePos = Random.Range(0, 4);
 
@@ -92,7 +128,7 @@ public class SpawnFloor : MonoBehaviour
                 counter++;
             }
         }
-        else if (nextTilePos == 1 && (currentX + 1) < floorSize)
+        if (nextTilePos == 1 && (currentX + 1) < floorSize)
         {
             if (Floor[currentX + 1, currentZ].activeInHierarchy == false)
             {
@@ -105,7 +141,7 @@ public class SpawnFloor : MonoBehaviour
                 counter++;
             }
         }
-        else if (nextTilePos == 2 && (currentZ - 1) >= 0)
+        if (nextTilePos == 2 && (currentZ - 1) >= 0)
         {
             if (Floor[currentX, currentZ - 1].activeInHierarchy == false)
             {
@@ -118,7 +154,7 @@ public class SpawnFloor : MonoBehaviour
                 counter++;
             }
         }
-        else if (nextTilePos == 3 && (currentZ + 1) < floorSize)
+        if (nextTilePos == 3 && (currentZ + 1) < floorSize)
         {
             if (Floor[currentX, currentZ + 1].activeInHierarchy == false)
             {
@@ -132,10 +168,14 @@ public class SpawnFloor : MonoBehaviour
             }
         }
         //Checks if ending point has been reached
-        if ((currentX == 0 && startX == floorSize) || (currentX == floorSize && startX == 0) || (currentZ == 0 && startZ == floorSize) || (currentZ == floorSize && startZ == 0))
+        if ((currentX == endX) && (currentZ == endZ))
         {
             completed = true;
             Debug.Log("Reached true");
+            Debug.Log(currentZ);
+            Debug.Log(currentX);
+            Debug.Log(endZ);
+            Debug.Log(endX);
         }
 
         Debug.Log("X "+currentX);
@@ -163,7 +203,7 @@ public class SpawnFloor : MonoBehaviour
     {
         if (!completed)
         {
-            createPath(currentX, currentZ, startX, startZ);
+            createPath(currentX, currentZ, startX, startZ, endX, endZ);
         }
     }
 }
