@@ -9,15 +9,13 @@ public class SpawnFloor : MonoBehaviour
     public GameObject[,] Floor;
     private bool validTile = false;
 
-    public int numConFails = 0;
-
     bool completed = false;
 
     int counter = 0;
 
     //Holds starting tile's x and z position for player spawn 
-    int startX = 0;
-    int startZ = 0;
+    public int startX = 0;
+    public int startZ = 0;
 
     //Holds the currently generated tiles x and z position
     int currentX, currentZ;
@@ -32,8 +30,8 @@ public class SpawnFloor : MonoBehaviour
         {
             for (int z = 0; z < floorSize; z++)
             {
-                Floor[x,z] = Instantiate(floorTile, new Vector3(x, 0, z), Quaternion.identity);
-                Floor[x,z].SetActive(false);
+                Floor[x, z] = Instantiate(floorTile, new Vector3(x, 0, z), Quaternion.identity);
+                Floor[x, z].SetActive(false);
             }
         }
 
@@ -56,7 +54,7 @@ public class SpawnFloor : MonoBehaviour
                         startZ = randZ;
                         validTile = true;
                     }
-                    else if (randZ == 0 || randZ == floorSize)
+                    if (randZ == 0 || randZ == floorSize)
                     {
                         Floor[randX, randZ].SetActive(true);
                         startX = randX;
@@ -69,7 +67,6 @@ public class SpawnFloor : MonoBehaviour
 
         //To Do: Create path to generated endpoint tile, by checking if they are
         //connected and contineing until we reach the endpoint
-
         currentX = startX;
         currentZ = startZ;
 
@@ -98,11 +95,11 @@ public class SpawnFloor : MonoBehaviour
                 currentX--;
                 //Debug.Log("z-");
                 counter = 0;
-           }
-           else
-           {
-               counter++;
-           }
+            }
+            else
+            {
+                counter++;
+            }
         }
         else if (nextTilePos == 1 && (currentX + 1) < floorSize)
         {
@@ -120,37 +117,38 @@ public class SpawnFloor : MonoBehaviour
         }
         else if (nextTilePos == 2 && (currentZ - 1) >= 0)
         {
-             if (Floor[currentX, currentZ - 1].activeInHierarchy == false)
-             {
+            if (Floor[currentX, currentZ - 1].activeInHierarchy == false)
+            {
                 Floor[currentX, currentZ - 1].SetActive(true);
                 currentZ--;
                 //Debug.Log("z-");
                 counter = 0;
-             }
-             else
-             {
-                 counter++;
-             }
+            }
+            else
+            {
+                counter++;
+            }
         }
         else if (nextTilePos == 3 && (currentZ + 1) < floorSize)
         {
-              if (Floor[currentX, currentZ + 1].activeInHierarchy == false)
-              {
+            if (Floor[currentX, currentZ + 1].activeInHierarchy == false)
+            {
                 Floor[currentX, currentZ + 1].SetActive(true);
                 currentZ++;
                 //Debug.Log("z+");
                 counter = 0;
-              }
-              else
-              {
-                  counter++;
-              }
+            }
+            else
+            {
+                counter++;
+            }
         }
         //Checks if ending point has been reached
-        if ((currentX == 0 && startX == floorSize-1) || (currentX == floorSize-1 && startX == 0) || (currentZ == 0 && startZ == floorSize-1) || (currentZ == floorSize-1 && startZ == 0))
+        if ((currentX == 0 && startX == floorSize - 1) || (currentX == floorSize - 1 && startX == 0) || (currentZ == 0 && startZ == floorSize - 1) || (currentZ == floorSize - 1 && startZ == 0))
         {
             completed = true;
-            Debug.Log("Reached true");
+            Floor[currentX, currentZ].GetComponent<TileInfo>().isEnd = true;
+            //Debug.Log("Reached true");
         }
 
         //Debug.Log("Xa "+currentX);
@@ -168,6 +166,7 @@ public class SpawnFloor : MonoBehaviour
             }
             currentX = startX;
             currentZ = startZ;
+            Floor[startX, startZ].SetActive(true);
             return;
         }
         return;
@@ -176,6 +175,6 @@ public class SpawnFloor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
