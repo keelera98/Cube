@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float waitTime;
     //public Text countText;
     public Text winText;
+    public Text timeText;
+    private bool gameOver = false;
 
     // Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
     private Rigidbody rb;
@@ -39,9 +41,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        waitTime -= Time.deltaTime;
-        if (waitTime < 0)
+        waitTime += Time.deltaTime;
+        if (waitTime > 0)
+        {
             speed = speedMod;
+            if(!gameOver)
+                timeText.text = "Time: " + (int)waitTime + " seconds";
+        }
     }
 
     // Each physics step..
@@ -62,12 +68,13 @@ public class PlayerController : MonoBehaviour
     //Checks for end tile
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         if(collision.gameObject.name == "FloorTile(Clone)")
         {
             if(collision.gameObject.GetComponent<TileInfo>().isEnd == true)
             {
                 winText.text = "You Win!";
+                gameOver = true;
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }
