@@ -1,15 +1,8 @@
 ﻿<Properties StartupConfiguration="{1525E26F-7A77-9551-B1A1-BC08C327920D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/TileInfo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/SpawnFloor.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets/Scripts/SpawnFloor.cs" Line="152" Column="29" />
-      <File FileName="Assets/Scripts/CameraController.cs" Line="22" Column="88" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="13" Column="27" />
-      <File FileName="Assets/Scripts/Accelerator.cs" Line="23" Column="1" />
-      <File FileName="Assets/Scripts/TileInfo.cs" Line="5" Column="18" />
-=======
-      <File FileName="Assets/Scripts/SpawnFloor.cs" Line="75" Column="1" />
->>>>>>> 6af1af22309bd26fb13f4e4a803b0fee51c27b57
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="77" Column="13" />
+      <File FileName="Assets/Scripts/SpawnFloor.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
