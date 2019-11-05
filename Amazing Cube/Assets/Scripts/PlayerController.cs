@@ -13,10 +13,10 @@ public class PlayerController : MonoBehaviour
     public float speedMod;
     public GameObject floor;
     public float waitTime;
-    private float fallTime = 5f;
     //public Text countText;
     public Text winText;
-    private bool isColliding = false;
+    public Text timeText;
+    private bool gameOver = false;
 
     // Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
     private Rigidbody rb;
@@ -28,31 +28,25 @@ public class PlayerController : MonoBehaviour
         // Assign the Rigidbody component to our private rb variable
         rb = GetComponent<Rigidbody>();
 
-        //Moves player to starting position
+        // Set the count to zero 
+        //count = 0;
+
+        // Run the SetCountText function to update the UI (see below)
+        //SetCountText();
+
+        // Set the text property of our Win Text UI to an empty string, making the 'You Win' (game over message) blank
+        //winText.text = "";
         transform.position = new Vector3(floor.GetComponent<SpawnFloor>().startX, 0.5f, floor.GetComponent<SpawnFloor>().startZ);
     }
 
     void Update()
     {
-        waitTime -= Time.deltaTime;
-        if (waitTime < 0)
-            speed = speedMod;
-
-        //If is in air for more than 5 sec, player has likly fallen
-        if (isColliding)
+        waitTime += Time.deltaTime;
+        if (waitTime > 0)
         {
-            fallTime -= Time.deltaTime;
-            if (fallTime < 2.5f)
-            {
-                transform.position = new Vector3(floor.GetComponent<SpawnFloor>().startX, 0.5f, floor.GetComponent<SpawnFloor>().startZ);
-                rb.constraints = RigidbodyConstraints.FreezeAll;
-
-            }
-            if(fallTime < 0)
-            {
-                rb.constraints = RigidbodyConstraints.None;
-                fallTime = 5f;
-            }
+            speed = speedMod;
+            if(!gameOver)
+                timeText.text = "Time: " + (int)waitTime + " seconds";
         }
     }
 
@@ -71,26 +65,52 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movement * speed);
     }
 
+    //Checks for end tile
     void OnCollisionEnter(Collision collision)
     {
-        //Checks for end tile
+        //Debug.Log(collision.gameObject.name);
         if(collision.gameObject.name == "FloorTile(Clone)")
         {
             if(collision.gameObject.GetComponent<TileInfo>().isEnd == true)
             {
                 winText.text = "You Win!";
+                gameOver = true;
                 rb.constraints = RigidbodyConstraints.FreezeAll;
             }
         }
     }
 
-    void OnCollisionStay(Collision collision)
+    // When this game object intersects a collider with 'is trigger' checked, 
+    // store a reference to that collider in a variable named 'other'..
+    /*
+    void OnTriggerEnter(Collider other)
     {
-        isColliding = false;
+        // ..and if the game object we intersect has the tag 'Pick Up' assigned to it..
+        if (other.gameObject.CompareTag("Pick Up"))
+        {
+            // Make the other game object (the pick up) inactive, to make it disappear
+            other.gameObject.SetActive(false);
+
+            // Add one to the score variable 'count'
+            //count = count + 1;
+
+            // Run the 'SetCountText()' function (see below)
+            //SetCountText();
+        }
     }
 
-    void OnCollisionExit(Collision collision)
+    // Create a standalone function that can update the 'countText' UI and check if the required amount to win has been achieved
+    void SetCountText()
     {
-        isColliding = true;
+        // Update the text field of our 'countText' variable
+        //countText.text = "Count: " + count.ToString();
+
+        // Check if our 'count' is equal to or exceeded 12
+        if (count >= 12)
+        {
+            // Set the text value of our 'winText'
+            winText.text = "You Win!";
+        }
     }
+    */
 }
