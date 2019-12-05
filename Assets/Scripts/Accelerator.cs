@@ -24,7 +24,7 @@ public class Accelerator : MonoBehaviour
 
         if (!freeze)
         {
-            Vector3 force = new Vector3(accelInput.x, 0, accelInput.y);
+            Vector3 force = new Vector3(accelInput.x, 0, accelInput.z);
             //flat-on desk
             //transform.Translate(accelInput.x, 0, accelInput.z);
             //held in hand
