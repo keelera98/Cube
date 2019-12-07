@@ -6,6 +6,7 @@ public class TileInfo : MonoBehaviour
 {
     public bool isEnd;
     private bool isColored = false;
+    public bool cubePlaced;
 
     void Start()
     {

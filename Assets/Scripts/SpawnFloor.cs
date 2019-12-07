@@ -7,7 +7,7 @@ public class SpawnFloor : MonoBehaviour
     public int floorSize;
     public GameObject[,] Floor;
     private bool validTile = false;
-    private GameObject cube;
+    public GameObject Cube;
 
     bool completed = false;
 
@@ -72,8 +72,10 @@ public class SpawnFloor : MonoBehaviour
         {
             createPath();
         }
-
-        spawnCube();
+        for (int i = 0; i < 3; i++)
+        {
+            spawnCube();
+        }
     }
 
     //Create path function
@@ -174,15 +176,14 @@ public class SpawnFloor : MonoBehaviour
         {
             randX = Random.Range(0, floorSize);
             randZ = Random.Range(0, floorSize);
-            if(Floor[randX, randZ].activeInHierarchy == true)
+            if(Floor[randX, randZ].activeInHierarchy == true && Floor[randX, randZ] != Floor[startX, startZ] && Floor[randX, randZ].GetComponent<TileInfo>().cubePlaced == false && Floor[randX, randZ].GetComponent<TileInfo>().isEnd == false)
             {
                 spawn = true;
-                //cube[randX, randZ]
-                Debug.Log("Match");
+                Instantiate(Cube, new Vector3(randX, 0, randZ), Quaternion.identity);
+                Floor[randX, randZ].GetComponent<TileInfo>().cubePlaced = true;
+                //Debug.Log("Match");
                 Debug.Log(randX + " " + randZ);
             }
-            else
-                Debug.Log("Retry");
         }    
 
         //
