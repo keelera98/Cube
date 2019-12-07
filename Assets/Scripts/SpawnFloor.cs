@@ -179,7 +179,7 @@ public class SpawnFloor : MonoBehaviour
             if(Floor[randX, randZ].activeInHierarchy == true && Floor[randX, randZ] != Floor[startX, startZ] && Floor[randX, randZ].GetComponent<TileInfo>().cubePlaced == false && Floor[randX, randZ].GetComponent<TileInfo>().isEnd == false)
             {
                 spawn = true;
-                Instantiate(Cube, new Vector3(randX, 0, randZ), Quaternion.identity);
+                Instantiate(Cube, new Vector3(randX, .5f, randZ-.25f), Quaternion.identity);
                 Floor[randX, randZ].GetComponent<TileInfo>().cubePlaced = true;
                 //Debug.Log("Match");
                 Debug.Log(randX + " " + randZ);
