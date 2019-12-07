@@ -514,7 +514,7 @@ MonoBehaviour:
   floorTile: {fileID: 5873212711401757208, guid: 0280d790dc5d74530bd05b33b3fc67a3,
     type: 3}
   floorSize: 10
-  Cube: {fileID: 5111293762213375827, guid: 3dd35f11e44fd4cae8e77dabc28d2af0, type: 3}
+  Cube: {fileID: 1825665029521442110, guid: 0bee65679e5fd41ce9c661a376261aca, type: 3}
   startX: 0
   startZ: 0
 --- !u!4 &836151212
