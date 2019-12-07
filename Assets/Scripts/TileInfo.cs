@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class TileInfo : MonoBehaviour
 {
     public bool isEnd;
-    public Material endMaterial;
     public bool cubePlaced;
+    public Material endMaterial;
 
     void Start()
     {
