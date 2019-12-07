@@ -936,6 +936,11 @@ PrefabInstance:
       propertyPath: fallTime
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5412397695249833073, guid: 5e4d871bac28b4cfdb3a3494fb850efb,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3384b66b14d60694cbbd909acb52bdd5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e4d871bac28b4cfdb3a3494fb850efb, type: 3}
 --- !u!1 &1870103618
