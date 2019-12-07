@@ -25,7 +25,7 @@ public class TileInfo : MonoBehaviour
 
     void Update()
     {
-        if (isColored)
+        if (isColored && !isEnd)
         {
             var tileRenderer = gameObject.GetComponent<Renderer>();
 
