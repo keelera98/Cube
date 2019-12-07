@@ -7,6 +7,7 @@ public class SpawnFloor : MonoBehaviour
     public int floorSize;
     public GameObject[,] Floor;
     private bool validTile = false;
+    private GameObject cube;
 
     bool completed = false;
 
@@ -71,6 +72,8 @@ public class SpawnFloor : MonoBehaviour
         {
             createPath();
         }
+
+        spawnCube();
     }
 
     //Create path function
@@ -160,6 +163,29 @@ public class SpawnFloor : MonoBehaviour
             currentZ = startZ;
             Floor[startX, startZ].SetActive(true);
         }
+    }
+
+    void spawnCube()
+    {
+        int randX;
+        int randZ;
+        bool spawn = false;
+        while(!spawn)
+        {
+            randX = Random.Range(0, floorSize);
+            randZ = Random.Range(0, floorSize);
+            if(Floor[randX, randZ].activeInHierarchy == true)
+            {
+                spawn = true;
+                //cube[randX, randZ]
+                Debug.Log("Match");
+                Debug.Log(randX + " " + randZ);
+            }
+            else
+                Debug.Log("Retry");
+        }    
+
+        //
     }
 
     // Update is called once per frame
