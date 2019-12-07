@@ -7,6 +7,7 @@ public class TileInfo : MonoBehaviour
 {
     public bool isEnd;
     public Material endMaterial;
+    public bool cubePlaced;
 
     void Start()
     {
